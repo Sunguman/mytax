@@ -1,9 +1,15 @@
-let basic_salary = number(prompt("Enter your basic salary:"));
-let benefits = number(prompt("Enter your benefits:"));
+document.getElementById('tax_form').addEventListener('submit',function(event){
+event.preventDefault();
+
+    let basic_salary = Number(document.getElementById('basic').value);
+let benefits = Number(document.getElementById('benefits').value);
 
 function calculateGrossSalary(basic_salary, benefits) {
     return basic_salary + benefits;
 }
+
+let gross_salary = calculateGrossSalary(basic_salary, benefits);
+document.getElementById('gross_salary').innerHTML = gross_salary;
 
 let gross_salary = calculateGrossSalary(basic_salary, benefits);
 console.log("Gross Salary: " + gross_salary);
@@ -22,7 +28,7 @@ function calculatenhif(gross_salary) {
 }
 
 let nhif = calculatenhif(gross_salary);
-console.log("NHIF Deduction: " + nhif);
+document.getElementById('nhif').innerHTML = nhif;
 
 
 
@@ -122,4 +128,16 @@ rl.question("Enter basic salary: ", (basicInput) => {
     rl.close();
   });
 });
+
+
+
+
+
+
+
+    
+});
+
+
+
 
