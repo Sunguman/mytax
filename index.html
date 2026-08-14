@@ -6,74 +6,277 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
-    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <title>TaxEase — Kenyan take-home pay</title>
+
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div>
-        <header>
-            <h1>Tax Calculator</h1>
-        </header>
-        <form id="tax_form">
-            <div class="mb-3">
-                <label for="basic" class="form-label">Basic Salary</label>
-                <input type="number" class="form-control" id="basic" aria-describedby="emailHelp">
+
+    <header>
+        <div class="wrap">
+            <a class="brand" href="#home" data-target="home" aria-label="TaxEase — home">
+                <img class="brand-logo" src="Taxease.png" alt="TaxEase — Tax Calculation Calculator">
+            </a>
+            <nav class="navlinks" aria-label="Primary">
+                <a href="#home" data-target="home" class="active" aria-current="page">Home</a>
+                <a href="#mytax" data-target="mytax">My Tax</a>
+                <a href="https://itax.kra.go.ke/KRA-Portal/" target="_blank" rel="noopener noreferrer">
+                    iTax <span class="ext" aria-hidden="true">↗</span>
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="wrap">
+        <!-- ================= HOME ================= -->
+        <section id="home">
+            <p class="eyebrow">Kenya · monthly payslip</p>
+            <h1 class="title">Work out your <em>take-home pay</em>.</h1>
+            <p class="lede">Enter your basic salary and any benefits. TaxEase runs them through the current
+                KRA bands and statutory deductions to show what actually lands in your account.</p>
+
+            <div class="grid">
+                <!-- Input card -->
+                <div class="card">
+                    <div class="card-head">
+                        <h2>Your pay</h2>
+                        <p>Figures are monthly, in Kenyan shillings.</p>
+                    </div>
+                    <div>
+
+                        <form id="tax_form">
+                            <div class="mb-3">
+                                <label for="basic" class="form-label">Basic Salary</label>
+                                <input type="number" class="form-control" id="basic" aria-describedby="emailHelp">
+                            </div>
+                            <div class="mb-3">
+                                <label for="benefits" class="form-label">Benefits</label>
+                                <input type="number" class="form-control" id="benefits">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </form>
+
+                    </div>
+
+                    <div>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Tax Category</th>
+                                    <th scope="col">Category Output</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Gross Salary</td>
+                                    <td id="gross"></td>
+                                </tr>
+                                <tr>
+                                    <td>NHIF</td>
+                                    <td id="nhif"></td>
+                                </tr>
+                                <tr>
+                                    <td>NSSF</td>
+                                    <td id="nssf"></td>
+                                </tr>
+                                <tr>
+                                    <td>NHDF</td>
+                                    <td id="nhdf"></td>
+                                </tr>
+                                <tr>
+                                    <td>Taxable Income</td>
+                                    <td id="taxable_income"></td>
+                                </tr>
+                                <tr>
+                                    <td>Payee</td>
+                                    <td id="payee"></td>
+                                </tr>
+                                <tr>
+                                    <td>Net Salary</td>
+                                    <td id="net_salary"></td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+                        <p class="slip-note">A guide only. Your employer's payroll is the final word on what's remitted.
+                        </p>
+                    </div>
+                </div>
             </div>
-            <div class="mb-3">
-                <label for="benefits" class="form-label">Benefits</label>
-                <input type="number" class="form-control" id="benefits">
+        </section>
+
+        <!-- ================= MY TAX ================= -->
+        <section id="mytax" hidden>
+            <p class="eyebrow">Reference · 2025/26</p>
+            <h1 class="title">How Kenyan pay is <em>taxed</em>.</h1>
+            <p class="lede">The deductions on a Kenyan payslip, at the rates in force for the 2025/26 tax
+                year.
+                Always confirm current figures with KRA, NSSF and the SHA before relying on them for
+                payroll.</p>
+
+            <div class="ref-grid">
+
+                <!-- PAYE bands -->
+                <div class="ref span2">
+                    <span class="tag">PAYE · income tax</span>
+                    <h3>Progressive tax bands</h3>
+                    <p class="sub">Applied to your taxable income each month. Only the slice of pay inside
+                        each
+                        band is taxed at that band's rate — not your whole salary.</p>
+                    <div class="ladder">
+                        <div class="rung">
+                            <span class="band"><b>First KES 24,000</b><small>up to 24,000</small></span>
+                            <span class="rate">10%</span>
+                        </div>
+                        <div class="rung">
+                            <span class="band"><b>Next KES 8,333</b><small>24,001 – 32,333</small></span>
+                            <span class="rate">25%</span>
+                        </div>
+                        <div class="rung">
+                            <span class="band"><b>Up to KES 500,000</b><small>32,334 –
+                                    500,000</small></span>
+                            <span class="rate">30%</span>
+                        </div>
+                        <div class="rung">
+                            <span class="band"><b>Up to KES 800,000</b><small>500,001 –
+                                    800,000</small></span>
+                            <span class="rate">32.5%</span>
+                        </div>
+                        <div class="rung">
+                            <span class="band"><b>Above KES 800,000</b><small>800,001 and
+                                    over</small></span>
+                            <span class="rate">35%</span>
+                        </div>
+                    </div>
+                    <div class="relief">
+                        <b>Personal relief:</b> every resident gets KES 2,400/month (KES 28,800/year)
+                        knocked off
+                        the tax due. The 32.5% and 35% top bands came in under the Finance Act 2023.
+                    </div>
+                </div>
+
+                <!-- SHIF -->
+                <div class="ref">
+                    <span class="tag">SHIF · formerly NHIF</span>
+                    <h3>Health cover</h3>
+                    <p class="sub">Since October 2024 the NHIF was replaced by the Social Health Insurance
+                        Fund
+                        under the Social Health Authority (SHA).</p>
+                    <div class="kv"><span>Rate</span><span class="v">2.75% of gross</span></div>
+                    <div class="kv"><span>Minimum</span><span class="v">KES 300 / month</span></div>
+                    <div class="kv"><span>Maximum</span><span class="v">no cap</span></div>
+                    <div class="kv"><span>Remit by</span><span class="v">9th of next month</span></div>
+                </div>
+
+                <!-- Housing Levy -->
+                <div class="ref">
+                    <span class="tag">AHL · formerly NHDF</span>
+                    <h3>Affordable Housing Levy</h3>
+                    <p class="sub">The housing contribution under the Affordable Housing Act 2024. The
+                        employee's
+                        share is matched by the employer.</p>
+                    <div class="kv"><span>Employee</span><span class="v">1.5% of gross</span></div>
+                    <div class="kv"><span>Employer</span><span class="v">1.5% (matched)</span></div>
+                    <div class="kv"><span>Treatment</span><span class="v">before PAYE</span></div>
+                    <div class="kv"><span>Remit by</span><span class="v">9th of next month</span></div>
+                </div>
+
+                <!-- NSSF -->
+                <div class="ref span2">
+                    <span class="tag">NSSF · pension</span>
+                    <h3>National Social Security Fund</h3>
+                    <p class="sub">6% from you, matched 6% by your employer, on pensionable pay. From the
+                        February
+                        2026 payroll the earnings limits rose to their Year-4 levels (NSSF Act, 2013).</p>
+                    <div class="kv"><span>Tier I — pay up to KES 9,000</span><span class="v">max KES
+                            540</span></div>
+                    <div class="kv"><span>Tier II — pay KES 9,001 to 108,000</span><span class="v">max KES
+                            5,940</span>
+                    </div>
+                    <div class="kv"><span>Maximum employee deduction</span><span class="v">KES 6,480 /
+                            month</span>
+                    </div>
+                    <div class="kv"><span>Deducted</span><span class="v">before PAYE is worked out</span>
+                    </div>
+                </div>
+
+                <!-- Finance Act / iTax -->
+                <div class="ref span2">
+                    <span class="tag">Finance Act · the yearly picture</span>
+                    <h3>What the Finance Bill changes</h3>
+                    <p>Each year a Finance Bill goes through Parliament and, once assented to, becomes the
+                        Finance
+                        Act that sets the rates above. The current PAYE bands trace to the Finance Act 2023;
+                        SHIF
+                        arrived with the Social Health Insurance Act 2023, the housing levy with the
+                        Affordable
+                        Housing Act 2024, and NSSF limits step up in phases under the NSSF Act 2013. Because
+                        these
+                        shift most years, treat this page as a snapshot and confirm before you run live
+                        payroll.</p>
+                    <div class="flag-strip" aria-hidden="true">
+                        <i class="k"></i><i class="w"></i><i class="r"></i><i class="w"></i><i
+                            class="g"></i>
+                    </div>
+                    <p style="margin-top:18px">Ready to file or check your PIN? Head to KRA's iTax portal.
+                    </p>
+                    <a class="itax-cta" href="https://itax.kra.go.ke/KRA-Portal/" target="_blank"
+                        rel="noopener noreferrer">Open iTax on kra.go.ke <span
+                            aria-hidden="true">↗</span></a>
+                </div>
+
             </div>
+        </section>
+    </main>
 
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
+    <footer>
 
-    </div>
-
-    <div>
-         <table class="table">
-                <thead>
-                    <tr>
-                        <th scope="col">Tax Category</th>
-                        <th scope="col">Category Output</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Gross Salary</td>
-                        <td id="gross"></td>
-                    </tr>
-                    <tr>
-                        <td>NHIF</td>
-                        <td id="nhif"></td>
-                    </tr>
-                    <tr>
-                        <td>NSSF</td>
-                        <td id="nssf"></td>
-                    </tr>
-                       <tr>
-                        <td>NHDF</td>
-                        <td id="nhdf"></td>
-                    </tr>
-                    <tr>
-                        <td>Taxable Income</td>
-                        <td id="taxable_income"></td>
-                    </tr>
-                    <tr>
-                        <td>Payee</td>
-                        <td id="payee"></td>
-                    </tr>
-                    <tr>
-                        <td>Net Salary</td>
-                        <td id="net_salary"></td>
-                    </tr>
-                    
-                </tbody>
-            </table>
+        <div class="wrap">
+            <span class="copy">TaxEase <span class="dot">·</span> @ 2026 · CopyRight</span>
+            <span class="disc">For guidance only — not tax advice. Rates reflect the 2025/26 year and may change
+                with each Finance Act. Always confirm with KRA, NSSF and the SHA.</span>
+        </div>
 
 
+    </footer>
+
+    <script>
+        // Navbar: switch between the Home and My Tax sections.
+        (function () {
+            var links = document.querySelectorAll('[data-target]');
+            var sections = { home: document.getElementById('home'), mytax: document.getElementById('mytax') };
+
+            function show(target) {
+                Object.keys(sections).forEach(function (key) {
+                    sections[key].hidden = (key !== target);
+                });
+                document.querySelectorAll('.navlinks a[data-target]').forEach(function (a) {
+                    var on = a.dataset.target === target;
+                    a.classList.toggle('active', on);
+                    if (on) { a.setAttribute('aria-current', 'page'); }
+                    else { a.removeAttribute('aria-current'); }
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+
+            links.forEach(function (el) {
+                el.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    show(el.dataset.target);
+                });
+            });
+        })();
+    </script>
 
 
-    </div>
 
 
 
